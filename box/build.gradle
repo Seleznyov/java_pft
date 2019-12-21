@@ -1,4 +1,13 @@
 apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = 'MyFirstProgram'
+mainClassName = 'qa.box.MyFirstProgram'
+
+
+repositories{
+     mavenCentral()
+}
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+
+}

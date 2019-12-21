@@ -6,24 +6,18 @@ public class MyFirstProgram {
         first_function("мир1");
         first_function("мир2");
 
-        double value=5;
-        System.out.println("Пллощадь квадрата со стороной "+value+" равна "+second_function(value));
+        Squer v = new Squer(5);
+        System.out.println("Пллощадь квадрата со стороной "+v.x+" равна "+v.second_function());
 
-        double x1=15;
-        double x2=14;
-        System.out.println("Пллощадь прямоугольника со сторонами "+x1+x2+" равна "+second_function(x1,x2));
+        Rectangle v1=new Rectangle(15,13);
+        System.out.println("Пллощадь прямоугольника со сторонами "+v1.x1+v1.x2+" равна "+v1.second_function());
 
     }
 
     public  static void first_function(String  tekst) {
         System.out.println("Привет "+tekst);
     }
-    public  static double second_function(double x) {
-        return x*x;
-    }
-    public  static double second_function(double x1, double x2) {
-        return x1 * x2;
-    }
-}
 
+
+}
 
