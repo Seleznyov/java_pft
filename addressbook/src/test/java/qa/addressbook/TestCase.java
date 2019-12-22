@@ -23,39 +23,55 @@ public class TestCase {
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get("http://localhost/addressbook/");
+    login("admin", "secret");
+  }
+  private void login(String username, String password) {
     driver.findElement(By.name("user")).click();
     driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys("admin");
+    driver.findElement(By.name("user")).sendKeys(username);
     driver.findElement(By.id("LoginForm")).click();
     driver.findElement(By.id("LoginForm")).click();
     driver.findElement(By.name("pass")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | name=pass | ]]
     driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys("secret");
+    driver.findElement(By.name("pass")).sendKeys(password);
     driver.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
   public void testUntitledTestCase() throws Exception {
-    driver.findElement(By.linkText("groups")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | link=groups | ]]
-    driver.findElement(By.name("new")).click();
+    gotoGroupPage();
+    initGroupCretion();
+    fillGruopForm(new GruopData("test1", "test2", "test3"));
+    submitGroupCreayion();
+    returntoGroupPage();
+  }
+
+  private void returntoGroupPage() {
+    driver.findElement(By.linkText("group page")).click();
+  }
+
+  private void submitGroupCreayion() {
+    driver.findElement(By.name("submit")).click();
+  }
+
+  private void fillGruopForm(GruopData gruopData) {
     driver.findElement(By.name("group_name")).click();
     driver.findElement(By.name("group_name")).clear();
-    driver.findElement(By.name("group_name")).sendKeys("tes");
-    driver.findElement(By.name("group_name")).sendKeys(Keys.DOWN);
-    driver.findElement(By.name("group_name")).clear();
-    driver.findElement(By.name("group_name")).sendKeys("test1");
+    driver.findElement(By.name("group_name")).sendKeys(gruopData.getName());
     driver.findElement(By.name("group_header")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | name=group_header | ]]
     driver.findElement(By.name("group_header")).clear();
-    driver.findElement(By.name("group_header")).sendKeys("test2");
+    driver.findElement(By.name("group_header")).sendKeys(gruopData.getHeader());
     driver.findElement(By.name("group_footer")).click();
     driver.findElement(By.name("group_footer")).clear();
-    driver.findElement(By.name("group_footer")).sendKeys("test3");
-    driver.findElement(By.name("submit")).click();
-    driver.findElement(By.linkText("group page")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | link=group page | ]]
+    driver.findElement(By.name("group_footer")).sendKeys(gruopData.getFooter());
+  }
+
+  private void initGroupCretion() {
+    driver.findElement(By.name("new")).click();
+  }
+
+  private void gotoGroupPage() {
+    driver.findElement(By.linkText("groups")).click();
   }
 
   @AfterClass(alwaysRun = true)
