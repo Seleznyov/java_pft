@@ -22,10 +22,6 @@ public class TestCase {
     driver = new FirefoxDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void testUntitledTestCase() throws Exception {
     driver.get("http://localhost/addressbook/");
     driver.findElement(By.name("user")).click();
     driver.findElement(By.name("user")).clear();
@@ -37,6 +33,10 @@ public class TestCase {
     driver.findElement(By.name("pass")).clear();
     driver.findElement(By.name("pass")).sendKeys("secret");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  @Test
+  public void testUntitledTestCase() throws Exception {
     driver.findElement(By.linkText("groups")).click();
     // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | link=groups | ]]
     driver.findElement(By.name("new")).click();
