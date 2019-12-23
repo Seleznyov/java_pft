@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
-
 import static org.testng.Assert.fail;
 
 public class TestCase {
@@ -38,19 +37,18 @@ public class TestCase {
   }
 
   @Test
-  public void testUntitledTestCase() throws Exception {
+  public void test1UntitledTestCase() throws Exception {
     gotoGroupPage();
     initGroupCretion();
     fillGruopForm(new GruopData("test1", "test2", "test3"));
-    submitGroupCreayion();
+    submitGroupCreation();
     returntoGroupPage();
   }
 
   private void returntoGroupPage() {
     driver.findElement(By.linkText("group page")).click();
   }
-
-  private void submitGroupCreayion() {
+  private void submitGroupCreation() {
     driver.findElement(By.name("submit")).click();
   }
 
@@ -69,10 +67,54 @@ public class TestCase {
   private void initGroupCretion() {
     driver.findElement(By.name("new")).click();
   }
-
   private void gotoGroupPage() {
     driver.findElement(By.linkText("groups")).click();
   }
+
+  @Test
+  public void test2UntitledTestCase() throws Exception {
+    gotoEditAddBook();
+    fillAddBookForm(new AddressData("stas", "stas", "seleznev", "stefler", "minsk", "911", "stefler@gmail.com"));
+    submitAddBook();
+    returntoContentPage();
+  }
+
+  private void returntoContentPage() {
+    driver.findElement(By.id("content")).click();
+  }
+
+  private void submitAddBook() {
+    driver.findElement(By.name("submit")).click();
+  }
+
+  private void fillAddBookForm(AddressData addressData) {
+    driver.findElement(By.name("firstname")).click();
+    driver.findElement(By.name("firstname")).clear();
+    driver.findElement(By.name("firstname")).sendKeys(addressData.getFirstname());
+    driver.findElement(By.name("middlename")).click();
+    driver.findElement(By.name("middlename")).clear();
+    driver.findElement(By.name("middlename")).sendKeys(addressData.getMidlename());
+    driver.findElement(By.name("lastname")).click();
+    driver.findElement(By.name("lastname")).clear();
+    driver.findElement(By.name("lastname")).sendKeys(addressData.getLastname());
+    driver.findElement(By.name("nickname")).click();
+    driver.findElement(By.name("nickname")).clear();
+    driver.findElement(By.name("nickname")).sendKeys(addressData.getNickname());
+    driver.findElement(By.name("address")).click();
+    driver.findElement(By.name("address")).clear();
+    driver.findElement(By.name("address")).sendKeys(addressData.getAddress());
+    driver.findElement(By.name("home")).click();
+    driver.findElement(By.name("home")).clear();
+    driver.findElement(By.name("home")).sendKeys(addressData.getPhoneHome());
+    driver.findElement(By.name("email")).click();
+    driver.findElement(By.name("email")).clear();
+    driver.findElement(By.name("email")).sendKeys(addressData.getEmail());
+  }
+
+  private void gotoEditAddBook() {
+    driver.findElement(By.linkText("add new")).click();
+  }
+
 
   @AfterClass(alwaysRun = true)
   public void tearDown() throws Exception {
@@ -82,6 +124,7 @@ public class TestCase {
       fail(verificationErrorString);
     }
   }
+
 
   private boolean isElementPresent(By by) {
     try {
