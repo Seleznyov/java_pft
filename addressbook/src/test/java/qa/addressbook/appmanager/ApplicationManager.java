@@ -1,25 +1,24 @@
-package qa.addressbook;
+package qa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import qa.addressbook.model.AddressData;
+import qa.addressbook.model.GruopData;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
-    private WebDriver driver;
-    private String baseUrl;
+public class ApplicationManager {
+    public WebDriver driver;
+    public String baseUrl;
 
-    @BeforeClass(alwaysRun = true)
-    public void setUp() throws Exception {
-      System.setProperty("webdriver.gecko.driver", "c:\\Users\\Admin\\Desktop\\geckodriver-v0.26.0-win64\\geckodriver.exe");
-      driver = new FirefoxDriver();
-      baseUrl = "https://www.katalon.com/";
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      driver.get("http://localhost/addressbook/");
-      login("admin", "secret");
+    public void init() {
+        System.setProperty("webdriver.gecko.driver", "c:\\Users\\Admin\\Desktop\\geckodriver-v0.26.0-win64\\geckodriver.exe");
+        driver = new FirefoxDriver();
+        baseUrl = "https://www.katalon.com/";
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.get("http://localhost/addressbook/");
+        login("admin", "secret");
     }
 
     private void login(String username, String password) {
@@ -34,15 +33,15 @@ public class TestBase {
       driver.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void returntoGroupPage() {
+    public void returntoGroupPage() {
       driver.findElement(By.linkText("group page")).click();
     }
 
-    protected void submitGroupCreation() {
+    public void submitGroupCreation() {
       driver.findElement(By.name("submit")).click();
     }
 
-    protected void fillGruopForm(GruopData gruopData) {
+    public void fillGruopForm(GruopData gruopData) {
       driver.findElement(By.name("group_name")).click();
       driver.findElement(By.name("group_name")).clear();
       driver.findElement(By.name("group_name")).sendKeys(gruopData.getName());
@@ -54,23 +53,23 @@ public class TestBase {
       driver.findElement(By.name("group_footer")).sendKeys(gruopData.getFooter());
     }
 
-    protected void initGroupCretion() {
+    public void initGroupCretion() {
       driver.findElement(By.name("new")).click();
     }
 
-    protected void gotoGroupPage() {
+    public void gotoGroupPage() {
       driver.findElement(By.linkText("groups")).click();
     }
 
-    protected void returntoContentPage() {
+    public void returntoContentPage() {
       driver.findElement(By.id("content")).click();
     }
 
-    protected void submitAddBook() {
+    public void submitAddBook() {
       driver.findElement(By.name("submit")).click();
     }
 
-    protected void fillAddBookForm(AddressData addressData) {
+    public void fillAddBookForm(AddressData addressData) {
       driver.findElement(By.name("firstname")).click();
       driver.findElement(By.name("firstname")).clear();
       driver.findElement(By.name("firstname")).sendKeys(addressData.getFirstname());
@@ -94,20 +93,19 @@ public class TestBase {
       driver.findElement(By.name("email")).sendKeys(addressData.getEmail());
     }
 
-    protected void gotoEditAddBook() {
+    public void gotoEditAddBook() {
       driver.findElement(By.linkText("add new")).click();
     }
 
-    @AfterClass(alwaysRun = true)
-    public void tearDown() throws Exception {
-      driver.quit();
+    public void stop() {
+        driver.quit();
     }
 
-    protected void deleteSelectedGruops() {
+    public void deleteSelectedGruops() {
       driver.findElement(By.name("delete")).click();
     }
 
-    protected void selectGruop() {
+    public void selectGruop() {
       driver.findElement(By.name("selected[]")).click();
     }
 }

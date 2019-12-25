@@ -1,4 +1,4 @@
-package qa.addressbook;
+package qa.addressbook.test;
 
 import org.testng.annotations.Test;
 
@@ -6,9 +6,9 @@ public class GruopDeletionTest extends TestBase {
 
   @Test
   public void testgruopDeletionTestCase() throws Exception {
-    gotoGroupPage();
-    selectGruop();
-    deleteSelectedGruops();
-    gotoGroupPage();
+    app.gotoGroupPage();
+    app.selectGruop();
+    app.deleteSelectedGruops();
+    app.gotoGroupPage();
   }
 }

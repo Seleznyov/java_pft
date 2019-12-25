@@ -1,4 +1,4 @@
-package qa.addressbook;
+package qa.addressbook.model;
 
 public class GruopData {
     private final String name;
