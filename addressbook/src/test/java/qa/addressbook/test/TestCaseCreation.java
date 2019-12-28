@@ -8,18 +8,18 @@ public class TestCaseCreation extends TestBase {
 
   @Test
   public void test1GroupCreation() throws Exception {
-    app.gotoGroupPage();
-    app.initGroupCretion();
-    app.fillGruopForm(new GruopData("test1", "test2", "test3"));
-    app.submitGroupCreation();
-    app.returntoGroupPage();
+    app.getNavigationHelp().gotoGroupPage();
+    app.getGroupHelp().initGroupCretion();
+    app.getGroupHelp().fillGruopForm(new GruopData("test1", "test2", "test3"));
+    app.getGroupHelp().submitGroupCreation();
+    app.getGroupHelp().returntoGroupPage();
   }
 
   @Test
   public void test2AddBookCreation() throws Exception {
-    app.gotoEditAddBook();
-    app.fillAddBookForm(new AddressData("stas", "stas", "seleznev", "stefler", "minsk", "911", "stefler@gmail.com"));
-    app.submitAddBook();
-    app.returntoContentPage();
+    app.getNavigationHelp().gotoEditAddBook();
+    app.getBookHelp().fillAddBookForm(new AddressData("stas", "stas", "seleznev", "stefler", "minsk", "911", "stefler@gmail.com"));
+    app.getBookHelp().submitAddBook();
+    app.getBookHelp().returntoContentPage();
   }
 }

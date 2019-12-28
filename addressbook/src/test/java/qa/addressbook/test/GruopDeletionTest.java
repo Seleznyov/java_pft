@@ -6,9 +6,9 @@ public class GruopDeletionTest extends TestBase {
 
   @Test
   public void testgruopDeletionTestCase() throws Exception {
-    app.gotoGroupPage();
-    app.selectGruop();
-    app.deleteSelectedGruops();
-    app.gotoGroupPage();
+    app.getNavigationHelp().gotoGroupPage();
+    app.getGroupHelp().selectGruop();
+    app.getGroupHelp().deleteSelectedGruops();
+    app.getNavigationHelp().gotoGroupPage();
   }
 }
