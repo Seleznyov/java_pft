@@ -2,6 +2,8 @@ package qa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import qa.addressbook.model.AddressData;
 
 public class BookHelp extends HelperBase {
@@ -17,7 +19,7 @@ public class BookHelp extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillAddBookForm(AddressData addressData) {
+  public void  fillAddBookForm(AddressData addressData, boolean creation) {
     type(By.name("firstname"),addressData.getFirstname());
     type(By.name("middlename"),addressData.getMidlename());
     type(By.name("lastname"),addressData.getLastname());
@@ -25,14 +27,18 @@ public class BookHelp extends HelperBase {
     type(By.name("address"),addressData.getAddress());
     type(By.name("home"),addressData.getPhoneHome());
     type(By.name("email"),addressData.getEmail());
+
+    if (creation){
+      new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
-  public void selectBook() {click(By.id("26"));
+  public void selectBook() {click(By.id("6"));
   }
-
   public void initBookModificatiom() {click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='stefler@gmail.com'])[1]/following::img[2]"));
   }
-
   public void submitAddBookModification() {click(By.name("update"));
   }
 }

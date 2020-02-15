@@ -44,6 +44,6 @@ public class Equation {
             else n=0;
         }
         System.out.println("Дискрименант равен = "+D);
-        System.out.println(n+"решений ");
+        System.out.println(n+" решений ");
     }
 }
