@@ -9,10 +9,7 @@ public class TestCaseCreation extends TestBase {
   @Test
   public void test1GroupCreation() throws Exception {
     app.getNavigationHelp().gotoGroupPage();
-    app.getGroupHelp().initGroupCretion();
-    app.getGroupHelp().fillGruopForm(new GruopData("test1", null, null));
-    app.getGroupHelp().submitGroupCreation();
-    app.getGroupHelp().returntoGroupPage();
+    app.getGroupHelp().createGroup(new GruopData("test1", null, null));
   }
 
   @Test

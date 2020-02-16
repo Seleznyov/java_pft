@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import qa.addressbook.model.GruopData;
 
-public class GroupHelp extends HelperBase{
+public class GroupHelp extends HelperBase {
     public GroupHelp(WebDriver driver) {
         super(driver);
     }
@@ -35,9 +35,22 @@ public class GroupHelp extends HelperBase{
         click(By.name("selected[]"));
     }
 
-    public void initGroupModification() {click(By.name("edit"));
+    public void initGroupModification() {
+        click(By.name("edit"));
     }
 
-    public void submitGroupModification() {click(By.name("update"));
+    public void submitGroupModification() {
+        click(By.name("update"));
+    }
+
+    public void createGroup(GruopData group) {
+        initGroupCretion();
+        fillGruopForm(group);
+        submitGroupCreation();
+        returntoGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
