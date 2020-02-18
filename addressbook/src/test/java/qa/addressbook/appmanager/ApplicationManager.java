@@ -1,5 +1,6 @@
 package qa.addressbook.appmanager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     public WebDriver driver;
+    protected boolean acceptNextAlert = true;
     private NavigationHelp navigationHelp;
     private BookHelp bookHelp;
     private GroupHelp groupHelp;
@@ -19,6 +21,7 @@ public class ApplicationManager {
     public ApplicationManager(String browser) {
         this.browser = browser;
     }
+
 
     public void init() {
         if(browser.equals(BrowserType.FIREFOX)){
@@ -47,11 +50,24 @@ public class ApplicationManager {
         return groupHelp;
     }
 
-    public BookHelp getBookHelp() {
-        return bookHelp;
-    }
+    public BookHelp getBookHelp() { return bookHelp; }
 
     public NavigationHelp getNavigationHelp() {
         return navigationHelp;
+    }
+
+    public String closeAlertAndGetItsText() {
+        try {
+            Alert alert = driver.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
     }
 }

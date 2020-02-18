@@ -35,10 +35,23 @@ public class BookHelp extends HelperBase {
     }
   }
 
-  public void selectBook() {click(By.id("6"));
+  public void selectBookByID() {click(By.id("6"));
   }
   public void initBookModificatiom() {click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='stefler@gmail.com'])[1]/following::img[2]"));
   }
   public void submitAddBookModification() {click(By.name("update"));
+  }
+  public void selectBook() { click(By.name("selected[]")); }
+  public  void  deleteSelectedBooks(){
+    driver.findElement(By.xpath("//input[@value='Delete']")).click();
+  }
+
+  public void createBook(AddressData book, boolean b) {
+    fillAddBookForm((book),true);
+    submitAddBook();
+    returntoContentPage();
+  }
+  public boolean isThereABook() {
+    return isElementPresent(By.name("selected[]"));
   }
 }

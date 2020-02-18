@@ -7,17 +7,15 @@ import qa.addressbook.model.GruopData;
 public class TestCaseCreation extends TestBase {
 
   @Test
-  public void test1GroupCreation() throws Exception {
+  public void test1GroupCreation()  {
     app.getNavigationHelp().gotoGroupPage();
     app.getGroupHelp().createGroup(new GruopData("test1", null, null));
   }
 
   @Test
-  public void test2AddBookCreation() throws Exception {
+  public void test2AddBookCreation()   {
     app.getNavigationHelp().gotoEditAddBook();
-    app.getBookHelp().fillAddBookForm(new AddressData("stas", "stas", "seleznev", "stefler", "minsk", "911", "stefler@gmail.com",
+    app.getBookHelp().createBook(new AddressData("stas", "stas", "seleznev", "stefler", "minsk", "911", "stefler@gmail.com",
             "testEdit1"),true);
-    app.getBookHelp().submitAddBook();
-    app.getBookHelp().returntoContentPage();
   }
 }
