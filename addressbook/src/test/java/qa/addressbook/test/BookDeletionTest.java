@@ -7,7 +7,7 @@ import qa.addressbook.model.AddressData;
 import static org.junit.Assert.assertTrue;
 
 
-public class BookDeletionTes extends TestBase {
+public class BookDeletionTest extends TestBase {
 
     @Test
     public  void testbooKDeletionTestCase() {
