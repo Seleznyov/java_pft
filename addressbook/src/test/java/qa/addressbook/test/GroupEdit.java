@@ -13,7 +13,7 @@ public class GroupEdit extends TestBase {
         if (! app.getGroupHelp().isThereAGroup()) {
             app.getGroupHelp().createGroup(new GruopData("test1", null, null));
         }
-        app.getGroupHelp().selectGruop();
+        app.getGroupHelp().selectGruop(before-1);
         app.getGroupHelp().initGroupModification();
         app.getGroupHelp().fillGruopForm(new GruopData("testEdit1", "testEdit2", "testEdit3"));
         app.getGroupHelp().submitGroupModification();

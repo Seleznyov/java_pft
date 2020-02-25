@@ -13,7 +13,7 @@ public class GruopDeletionTest extends TestBase {
     if (! app.getGroupHelp().isThereAGroup()) {
       app.getGroupHelp().createGroup(new GruopData("test1", null, null));
     }
-    app.getGroupHelp().selectGruop();
+    app.getGroupHelp().selectGruop(before-1);
     app.getGroupHelp().deleteSelectedGruops();
     app.getNavigationHelp().gotoGroupPage();
     int after=app.getGroupHelp().getGroupCount();
