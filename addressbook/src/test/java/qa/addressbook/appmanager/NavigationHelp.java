@@ -8,7 +8,7 @@ public class NavigationHelp extends HelperBase {
         super(driver);
     }
 
-    public void gotoGroupPage() {
+    public void GroupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && driver.findElement(By.tagName("h1")).getText().equals("Groups")
                 && isElementPresent(By.name("new"))) {
@@ -17,11 +17,11 @@ public class NavigationHelp extends HelperBase {
         click(By.linkText("groups"));
     }
 
-    public void gotoEditAddBook() {
+    public void Edit() {
         click(By.linkText("add new"));
     }
 
-    public void gotoHomepage() {
+    public void Homepage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }

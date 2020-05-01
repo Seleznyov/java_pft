@@ -4,6 +4,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
@@ -24,11 +25,14 @@ public class ApplicationManager {
 
 
     public void init() {
-        if(browser.equals(BrowserType.FIREFOX)){
-            driver=new FirefoxDriver();
-        } else if  (browser.equals(BrowserType.CHROME)) {
-            driver= new ChromeDriver();
+        if (browser.equals(BrowserType.FIREFOX)) {
+            driver = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.CHROME)) {
+            driver = new ChromeDriver();
+        } else if (browser.equals(BrowserType.IE)){
+            driver = new InternetExplorerDriver();
         }
+
        // System.setProperty("webdriver.gecko.driver", "c:\\Users\\Admin\\Desktop\\geckodriver-v0.26.0-win64\\geckodriver.exe");
        // driver = new FirefoxDriver();
         baseUrl = "https://www.katalon.com/";
@@ -46,13 +50,13 @@ public class ApplicationManager {
 
     public void stop() { driver.quit(); }
 
-    public GroupHelp getGroupHelp() {
+    public GroupHelp group() {
         return groupHelp;
     }
 
-    public BookHelp getBookHelp() { return bookHelp; }
+    public BookHelp Book() { return bookHelp; }
 
-    public NavigationHelp getNavigationHelp() {
+    public NavigationHelp goTo() {
         return navigationHelp;
     }
 

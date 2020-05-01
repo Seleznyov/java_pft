@@ -1,23 +1,30 @@
 package qa.addressbook.test;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.addressbook.model.GruopData;
 
+import java.util.List;
+
 public class GruopDeletionTest extends TestBase {
+  @BeforeMethod
+  public void ensurePrecondition() {
+    app.goTo().GroupPage();
+    if (app.group().list().size()==0) {
+      app.group().create(new GruopData("test1", null, null));
+    }
+  }
 
   @Test
-  public void testgruopDeletionTestCase() throws Exception {
-    app.getNavigationHelp().gotoGroupPage();
-    int before=app.getGroupHelp().getGroupCount();
-    if (! app.getGroupHelp().isThereAGroup()) {
-      app.getGroupHelp().createGroup(new GruopData("test1", null, null));
-    }
-    app.getGroupHelp().selectGruop(before-1);
-    app.getGroupHelp().deleteSelectedGruops();
-    app.getNavigationHelp().gotoGroupPage();
-    int after=app.getGroupHelp().getGroupCount();
-    Assert.assertEquals(after,before-1);
+  public void testgruopDeletionTestCase(){
+    List<GruopData> before=app.group().list();
+    int index =before.size()-1;
+    app.group().delete(index);
+    List<GruopData> after=app.group().list();
+    Assert.assertEquals(after.size(),before.size()-1);
 
+    before.remove(index);
+    Assert.assertEquals(before,after);
   }
 }

@@ -11,7 +11,7 @@ public class AddressData {
     private String group;
 
     public AddressData(String firstname, String midlename, String lastname, String nickname, String address, String phoneHome, String email,
-    String group) {
+                       String group) {
         this.firstname = firstname;
         this.midlename = midlename;
         this.lastname = lastname;
@@ -52,5 +52,13 @@ public class AddressData {
 
     public String getGroup() {
         return group;
+    }
+
+    @Override
+    public String toString() {
+        return "AddressData{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 }
