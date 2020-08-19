@@ -9,7 +9,7 @@ public class GruopData {
     private final String footer;
 
     public GruopData( String name, String header, String footer) {
-        this.id= 0;
+        this.id=  Integer.MAX_VALUE;
         this.name = name;
         this.header = header;
         this.footer = footer;
@@ -21,8 +21,9 @@ public class GruopData {
         this.footer = footer;
     }
 
-    public void setId(int id) {
+    public GruopData withId(int id) {
         this.id = id;
+        return this;
     }
 
     public int getId() { return id; }
@@ -38,7 +39,7 @@ public class GruopData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, id);
+        return Objects.hash(id, name);
     }
 
     @Override

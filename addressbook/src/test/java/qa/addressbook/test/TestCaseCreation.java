@@ -5,18 +5,18 @@ import org.testng.annotations.Test;
 import qa.addressbook.model.AddressData;
 import qa.addressbook.model.GruopData;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TestCaseCreation extends TestBase {
 
   @Test
   public void test1GroupCreation()  {
     app.goTo().GroupPage();
-    List<GruopData> before=app.group().list();
+    Set<GruopData> before=app.group().all();
     GruopData group=new GruopData("test2", null, null);
     app.group().create(group);
-    List<GruopData> after=app.group().list();
+    Set<GruopData> after=app.group().all();
     Assert.assertEquals(after.size(),before.size()+1);
 
 //    int max=0;
@@ -25,10 +25,11 @@ public class TestCaseCreation extends TestBase {
 //        max=g.getId();
 //      }
 //    }
-    int max1=after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId();
-    group.setId(max1);
+//    int max1=after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId();
+//    group.setId(max1);
+    group.withId(after.stream().mapToInt((o) -> o.getId()).max().getAsInt());
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Assert.assertEquals(before, after);
   }
 
   @Test

@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.addressbook.model.GruopData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelp extends HelperBase {
     public GroupHelp(WebDriver driver) {
@@ -35,8 +36,9 @@ public class GroupHelp extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectGruop(int index) {
-        driver.findElements(By.name("selected[]")).get(index).click();
+
+    public void selectGruopById(int id) {
+        driver.findElement(By.cssSelector("input[value='"+ id +"']")).click();
     }
 
     public void initGroupModification() {
@@ -54,16 +56,17 @@ public class GroupHelp extends HelperBase {
         returntoGroupPage();
     }
 
-    public void modify(int index, GruopData gruop) {
-        selectGruop(index);
+    public void modify(GruopData gruop) {
+        selectGruopById(gruop.getId());
         initGroupModification();
         fillGruopForm(gruop);
         submitGroupModification();
         returntoGroupPage();
     }
 
-    public void delete(int index) {
-        selectGruop(index);
+
+    public void delete(GruopData group) {
+        selectGruopById(group.getId());
         deleteSelectedGruops();
         returntoGroupPage();
     }
@@ -76,8 +79,9 @@ public class GroupHelp extends HelperBase {
       return  driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<GruopData> list() {
-        List<GruopData> groups= new ArrayList<GruopData>();
+
+    public Set <GruopData> all() {
+        Set<GruopData> groups= new HashSet<GruopData>();
         List<WebElement> elements= driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name=element.getText();
@@ -85,7 +89,7 @@ public class GroupHelp extends HelperBase {
             GruopData group=new GruopData(id,name, null,null);
             groups.add(group);
             System.out.println(groups);
-         }
+        }
         return groups;
     }
 }
